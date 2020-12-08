@@ -1,0 +1,24 @@
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f8f8;
+}
+
+@keyframes example {
+    from {width: 100%;}
+    to {width: 0%;}
+  }
+
+.progress-true{
+    background-color: green;
+    animation-name: example;
+    animation-duration: 4s;
+    animation-fill-mode: forwards
+
+}
+
+.progress-false{
+    background-color: red;
+    animation-name: example;
+    animation-duration: 4s;
+    animation-fill-mode: forwards
+}

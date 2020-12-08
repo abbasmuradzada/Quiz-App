@@ -1,0 +1,48 @@
+@import './details/reset';
+@import './details/common';
+@import './details/mixin.scss';
+
+.quiz{
+    margin: 50px auto;
+    width: 400px;
+    .quiz-header{
+        background-color: grey;
+        color: #fff;
+        text-align: center;
+        padding: 5px 0;
+        margin-bottom: 20px;
+    }
+    .answer{
+        margin: auto;
+        width: 100%;
+        margin: 5px 0;
+        cursor: pointer;
+        padding: 15px 30px;
+        background-color: white;
+        box-shadow: 0px 0px 2px rgba($color: #000000, $alpha: .3);
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    .timeline{
+        width: 100%;
+        height: 10px;
+        margin-top: 50px;
+        .progress-bar{
+            height: 100%;
+            height: 100%;
+        }
+    }
+}
+
+main{
+    width: 300px;
+    margin: auto;
+    @include flex(center, start);
+    >h1{
+        width: 100%;
+        text-align: center;
+    }
+    >form>label{
+        width: 100%;
+    }
+}
