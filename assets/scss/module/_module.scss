@@ -1,0 +1,19 @@
+.module-bg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba($color: #000000, $alpha: .5);
+    display: none;
+    .module{
+        width: 600px;
+        height: 200px;
+        background-color: #fff;
+        position: absolute;
+        left: 50%;
+        top: 40%;
+        transform: translate(-50%, -50%);
+        border-radius: 10px;
+    }
+}

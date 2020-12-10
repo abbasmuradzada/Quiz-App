@@ -31,3 +31,5 @@ const questions = [
     }
 
 ]
+
+const variants = ['A', 'B', 'C', 'D'];

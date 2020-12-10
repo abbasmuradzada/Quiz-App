@@ -1,12 +1,15 @@
 body{
     font-family: 'Roboto', sans-serif;
     background-color: #f8f8f8;
+    position: relative;
+    height: 100vh;
+    width: 100vw;
 }
 
 @keyframes example {
     from {width: 100%;}
     to {width: 0%;}
-  }
+}
 
 .progress-true{
     background-color: green;
@@ -21,4 +24,14 @@ body{
     animation-name: example;
     animation-duration: 4s;
     animation-fill-mode: forwards
+}
+
+.correct-answer{
+    background-color: #00ff00 !important;
+    color: #fff;
+}
+
+.wrong-answer{
+    background-color: #d6040d !important;
+    color: #fff;
 }

@@ -1,9 +1,10 @@
 @import './details/reset';
 @import './details/common';
 @import './details/mixin.scss';
+@import './module/index';
 
 .quiz{
-    margin: 50px auto;
+    margin: 30px auto;
     width: 400px;
     .quiz-header{
         background-color: grey;
@@ -42,7 +43,17 @@ main{
         width: 100%;
         text-align: center;
     }
-    >form>label{
-        width: 100%;
+    >form{
+        margin-top: 30px;
+        >label, input, button{
+            width: 100%;
+            margin: 5px 0;
+        }
     }
+    .score{
+        width: 100%;
+        margin-top: 30px;
+        text-align: right;
+    }
+    
 }
