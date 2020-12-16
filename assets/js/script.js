@@ -9,27 +9,41 @@ const telJokerBtn = document.querySelector('.tel-joker')
 const peopleJokerBtn = document.querySelector('.people-joker')
 const jokerModal = document.querySelector('.joker-module-bg'); 
 // const restartBtn = document.querySelector('.restart-btn');
-// let audio = new Audio;
-// audio.src='../sounds/final_answer.mp3';
 
+const mainAudio = './assets/sounds/main.mp3'
+const breakAudio = './assets/sounds/break.mp3'
+const startAudio = './assets/sounds/start.mp3'
+const correctAudio = './assets/sounds/correct.mp3'
+const wrongAudio = './assets/sounds/wrong.mp3'
+const jokerAudio = './assets/sounds/joker.mp3'
+
+let audio = new Audio;
+audio.src = mainAudio;
+audio.autoplay = true;
+// audio.play();
 let questionNumber = 0;
 let score = 0;
 let playerName;
 
+// Check Answer
 const checkAnswer = (correctIndex) => {
     let clickable = true;
     const progressBar = document.querySelector('.progress-bar');
     const answers = document.querySelectorAll('.answer');
     answers.forEach(answer => {
-        answer.addEventListener('click', () => {
+        answer.addEventListener('click', () => {            
+            console.log(audio.currentTime);
+            
             if (clickable) {
                 if (answer.id == correctIndex) {
                     console.log(true);
+                    audio.src = correctAudio;
                     score++;
                     progressBar.classList.add('progress-true');
                     answer.classList.add('correct-answer');
                 }else{
                     console.log(false);
+                    audio.src = wrongAudio;
                     progressBar.classList.add('progress-false');
                     answer.classList.add('wrong-answer');
                     document.getElementById(correctIndex).classList.add('correct-answer-of-wrong');
@@ -44,7 +58,9 @@ const checkAnswer = (correctIndex) => {
     });
 }
 
+//Render Quiz
 const renderQuiz = (questionNum) => {
+    audio.src = startAudio;
     const quiz = document.createElement('div');
     quiz.className='quiz';
     const quizHeader = document.createElement('div');
@@ -82,14 +98,16 @@ const renderQuiz = (questionNum) => {
     useJoker(questions[questionNum].answerList[questions[questionNum].correctAnswer - 1]);
 }
 
+// Start Quiz
 startBtn.addEventListener('click', (e) => {
     e.preventDefault();
     playerName = playerInput.value;
     renderQuiz(questionNumber);
     playerForm.remove();
-    // audio.play;
+    console.dir(audio);
 })
 
+// Restart Quiz
 const restartQuiz = () => {
     const quiz = document.querySelector('.quiz');
     moduleBg.style.display = 'none';
@@ -99,6 +117,7 @@ const restartQuiz = () => {
     renderQuiz(questionNumber);
 }
 
+// Create Modal
 const formModal = () => {
     moduleBg.style.display = 'block';
     moduleBg.firstElementChild.innerText=`Congrats ${playerName}. ${score<3 ? 'Not Bad' : 'Good'}. Your score is ${score}`;
@@ -115,12 +134,14 @@ const formModal = () => {
     })
 }
 
+// Next Question
 const pasNextQuestion = () => {
     const quiz = document.querySelector('.quiz');
     questionNumber++;
     setTimeout(() => {
         if(questionNumber == questions.length){
             formModal();
+            audio.src = breakAudio;
         }else{
             quiz.remove();
             renderQuiz(questionNumber);
@@ -131,11 +152,13 @@ const pasNextQuestion = () => {
 // Jokers
 const useJoker = (correctAnswer) => {
     telJokerBtn.addEventListener('click', () => {
+        audio.src = jokerAudio;
         jokerModal.style.display='block';
         jokerModal.firstElementChild.innerText= `In my opinion the correct variant is ${correctAnswer}`;
         telJokerBtn.setAttribute('disabled', 'true');
     })
     peopleJokerBtn.addEventListener('click', () => {
+        audio.src = jokerAudio;
         jokerModal.style.display='block';
         let peoplePercent = 0;
         while(peoplePercent < 50){
