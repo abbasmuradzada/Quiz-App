@@ -1,10 +1,26 @@
 body{
     font-family: 'Roboto', sans-serif;
-    // background-color: aqua;
-    // background-image: url('../../images/bg.webp');
+    background-image: url('../images/bg.jpg');
+    background-size: cover;
     position: relative;
     height: 100vh;
     width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    >.logo{
+        position: absolute;
+        top: 35px;
+        animation-name: logo;
+        animation-duration: 4s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+}
+
+@keyframes logo {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
 }
 
 @keyframes example {
@@ -13,18 +29,19 @@ body{
 }
 
 .progress-true{
-    background-color: green;
+    background-color: #00ff00;
     animation-name: example;
     animation-duration: 4s;
-    animation-fill-mode: forwards
-
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
 }
 
 .progress-false{
     background-color: red;
     animation-name: example;
     animation-duration: 4s;
-    animation-fill-mode: forwards
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
 }
 
 .correct-answer{
@@ -33,7 +50,7 @@ body{
 }
 
 .correct-answer-of-wrong{
-    background-color: rgba($color: #00ff00, $alpha: .1) !important;
+    background-color: #bfffbf !important;
 }
 
 .wrong-answer{

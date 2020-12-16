@@ -50,9 +50,55 @@ table {
 
 body {
   font-family: 'Roboto', sans-serif;
+  background-image: url("../images/bg.jpg");
+  background-size: cover;
   position: relative;
   height: 100vh;
   width: 100vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+body > .logo {
+  position: absolute;
+  top: 35px;
+  -webkit-animation-name: logo;
+          animation-name: logo;
+  -webkit-animation-duration: 4s;
+          animation-duration: 4s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+}
+
+@-webkit-keyframes logo {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes logo {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
 }
 
 @-webkit-keyframes example {
@@ -74,13 +120,15 @@ body {
 }
 
 .progress-true {
-  background-color: green;
+  background-color: #00ff00;
   -webkit-animation-name: example;
           animation-name: example;
   -webkit-animation-duration: 4s;
           animation-duration: 4s;
   -webkit-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
 }
 
 .progress-false {
@@ -91,6 +139,8 @@ body {
           animation-duration: 4s;
   -webkit-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
 }
 
 .correct-answer {
@@ -99,7 +149,7 @@ body {
 }
 
 .correct-answer-of-wrong {
-  background-color: rgba(0, 255, 0, 0.1) !important;
+  background-color: #bfffbf !important;
 }
 
 .wrong-answer {
@@ -117,12 +167,12 @@ body {
 }
 
 .jokers .joker-btn {
-  background-color: lightblue;
+  background-color: white;
   height: 50px;
   width: 50px;
   border-radius: 50%;
   border: none;
-  margin: 5px;
+  margin: 15px 5px;
   font-size: 18px;
   outline: none;
   cursor: pointer;
@@ -290,7 +340,6 @@ body {
 
 main {
   width: 400px;
-  margin: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -304,29 +353,76 @@ main {
       flex-wrap: wrap;
 }
 
-main > h1 {
-  width: 100%;
-  text-align: center;
-}
-
 main > form {
+  width: 100%;
   margin-top: 30px;
 }
 
 main > form > input, main > form button {
+  position: relative;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   width: 100%;
   margin: 5px 0;
   border: none;
-  padding: 10px 5px;
+  padding: 15px 10px;
   outline: none;
-  background-color: purple;
-  color: #fff;
+  font-size: 16px;
+  background-color: #fff;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+}
+
+main > form > input:first-child, main > form button:first-child {
+  -webkit-animation-name: input;
+          animation-name: input;
+}
+
+main > form > input:last-child, main > form button:last-child {
+  -webkit-animation-name: button;
+          animation-name: button;
 }
 
 main .score {
   width: 100%;
   margin-top: 30px;
   text-align: right;
+}
+
+@-webkit-keyframes input {
+  from {
+    left: -200px;
+  }
+  to {
+    left: 0px;
+  }
+}
+
+@keyframes input {
+  from {
+    left: -200px;
+  }
+  to {
+    left: 0px;
+  }
+}
+
+@-webkit-keyframes button {
+  from {
+    right: -200px;
+  }
+  to {
+    right: 0px;
+  }
+}
+
+@keyframes button {
+  from {
+    right: -200px;
+  }
+  to {
+    right: 0px;
+  }
 }

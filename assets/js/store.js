@@ -28,8 +28,7 @@ const questions = [
         question : "One of them is not product of microsoft?",
         answerList : ["MS Excel", "Angular", "C#", "Azure"],
         correctAnswer : 2,
-    }
-
+    },
 ]
 
 const variants = ['A', 'B', 'C', 'D'];

@@ -1,5 +1,6 @@
 const startBtn = document.querySelector('.start-btn');
 const main = document.querySelector('main');
+const logo = document.querySelector('.logo');
 const scoreText = document.querySelector('.score');
 const playerForm = document.querySelector('form');
 const moduleBg = document.querySelector('.module-bg');
@@ -32,8 +33,6 @@ const checkAnswer = (correctIndex) => {
     const answers = document.querySelectorAll('.answer');
     answers.forEach(answer => {
         answer.addEventListener('click', () => {            
-            console.log(audio.currentTime);
-            
             if (clickable) {
                 if (answer.id == correctIndex) {
                     console.log(true);
@@ -48,7 +47,6 @@ const checkAnswer = (correctIndex) => {
                     answer.classList.add('wrong-answer');
                     document.getElementById(correctIndex).classList.add('correct-answer-of-wrong');
                 }
-                // answer.style.poin
                 scoreText.innerText=score;
                 pasNextQuestion();
                 clickable = false;
@@ -71,7 +69,7 @@ const renderQuiz = (questionNum) => {
     question.innerText=questions[questionNum].question;
     quiz.append(quizHeader, question);
     let answerId = 1;
-    //
+    // Create Answers
     questions[questionNum].answerList.forEach((element, index) => {
         let answer = document.createElement('div');
         answer.innerText = `${variants[index]})      ${element}`
@@ -90,37 +88,32 @@ const renderQuiz = (questionNum) => {
     timeLine.appendChild(progressbar);
     quiz.append(timeLine);
     jokers.style.display='block';
-
     scoreText.innerText=`Score: ${score}`;
-
     checkAnswer(questions[questionNum].correctAnswer);
-
     useJoker(questions[questionNum].answerList[questions[questionNum].correctAnswer - 1]);
 }
 
 // Start Quiz
 startBtn.addEventListener('click', (e) => {
     e.preventDefault();
+    logo.remove();
     playerName = playerInput.value;
     renderQuiz(questionNumber);
     playerForm.remove();
-    console.dir(audio);
 })
 
 // Restart Quiz
 const restartQuiz = () => {
-    const quiz = document.querySelector('.quiz');
     moduleBg.style.display = 'none';
     score = 0;
     questionNumber = 0;
-    quiz.remove();
     renderQuiz(questionNumber);
 }
 
 // Create Modal
 const formModal = () => {
     moduleBg.style.display = 'block';
-    moduleBg.firstElementChild.innerText=`Congrats ${playerName}. ${score<3 ? 'Not Bad' : 'Good'}. Your score is ${score}`;
+    moduleBg.firstElementChild.innerText=`Congrats ${playerName}. ${score < (questions.length/2) ? 'Not Bad' : 'Good'}. Your score is ${score}`;
     restartBtn = document.createElement('button');
     restartBtn.innerText='Restart Quiz';
     goMenuBtn = document.createElement('button');
@@ -139,11 +132,11 @@ const pasNextQuestion = () => {
     const quiz = document.querySelector('.quiz');
     questionNumber++;
     setTimeout(() => {
+        quiz.remove();
         if(questionNumber == questions.length){
             formModal();
             audio.src = breakAudio;
         }else{
-            quiz.remove();
             renderQuiz(questionNumber);
         }
     }, 5000);     
@@ -173,9 +166,5 @@ const useJoker = (correctAnswer) => {
 window.onclick = function(event) {
     if (event.target == jokerModal) {
         jokerModal.style.display = "none";
-    }else if (event.target == moduleBg) {
-        moduleBg.style.display = "none";
     }
-
 }
-  
