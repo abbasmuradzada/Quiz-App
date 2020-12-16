@@ -9,11 +9,29 @@
     .module{
         width: 600px;
         height: 200px;
-        background-color: #fff;
+        background-color: #FF9200;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         position: absolute;
         left: 50%;
         top: 40%;
+        font-size: 20px;
         transform: translate(-50%, -50%);
         border-radius: 10px;
+        >button{
+            border: none;
+            margin-top: 10px;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            outline: none;
+            background-color: red;
+            color: white;
+            padding: 20px 30px;
+            display: block;
+        }
     }
 }

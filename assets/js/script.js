@@ -4,6 +4,10 @@ const scoreText = document.querySelector('.score');
 const playerForm = document.querySelector('form');
 const moduleBg = document.querySelector('.module-bg');
 const playerInput = document.getElementById('player-name');
+const jokers = document.querySelector('.jokers');
+const telJokerBtn = document.querySelector('.tel-joker')
+const peopleJokerBtn = document.querySelector('.people-joker')
+const jokerModal = document.querySelector('.joker-module-bg'); 
 // const restartBtn = document.querySelector('.restart-btn');
 // let audio = new Audio;
 // audio.src='../sounds/final_answer.mp3';
@@ -13,23 +17,30 @@ let score = 0;
 let playerName;
 
 const checkAnswer = (correctIndex) => {
+    let clickable = true;
     const progressBar = document.querySelector('.progress-bar');
     const answers = document.querySelectorAll('.answer');
     answers.forEach(answer => {
         answer.addEventListener('click', () => {
-            if (answer.id == correctIndex) {
-                console.log(true);
-                score++;
-                progressBar.classList.add('progress-true');
-                answer.classList.add('correct-answer');
-            }else{
-                console.log(false);
-                progressBar.classList.add('progress-false');
-                answer.classList.add('wrong-answer');
+            if (clickable) {
+                if (answer.id == correctIndex) {
+                    console.log(true);
+                    score++;
+                    progressBar.classList.add('progress-true');
+                    answer.classList.add('correct-answer');
+                }else{
+                    console.log(false);
+                    progressBar.classList.add('progress-false');
+                    answer.classList.add('wrong-answer');
+                    document.getElementById(correctIndex).classList.add('correct-answer-of-wrong');
+                }
+                // answer.style.poin
+                scoreText.innerText=score;
+                pasNextQuestion();
+                clickable = false;
             }
-            scoreText.innerText=score;
-            pasNextQuestion();
         })
+        return
     });
 }
 
@@ -39,7 +50,7 @@ const renderQuiz = (questionNum) => {
     const quizHeader = document.createElement('div');
     quizHeader.className = 'quiz-header';
     quizHeader.innerText= `Question ${questions[questionNum].id} / ${questions.length}`
-    const question = document.createElement('span');
+    const question = document.createElement('div');
     question.className='question';
     question.innerText=questions[questionNum].question;
     quiz.append(quizHeader, question);
@@ -62,10 +73,13 @@ const renderQuiz = (questionNum) => {
     progressbar.className='progress-bar';
     timeLine.appendChild(progressbar);
     quiz.append(timeLine);
+    jokers.style.display='block';
 
-    scoreText.innerText=score;
+    scoreText.innerText=`Score: ${score}`;
 
     checkAnswer(questions[questionNum].correctAnswer);
+
+    useJoker(questions[questionNum].answerList[questions[questionNum].correctAnswer - 1]);
 }
 
 startBtn.addEventListener('click', (e) => {
@@ -89,10 +103,15 @@ const formModal = () => {
     moduleBg.style.display = 'block';
     moduleBg.firstElementChild.innerText=`Congrats ${playerName}. ${score<3 ? 'Not Bad' : 'Good'}. Your score is ${score}`;
     restartBtn = document.createElement('button');
-    restartBtn.innerText='Restart Quiz'
-    moduleBg.firstElementChild.appendChild(restartBtn);
+    restartBtn.innerText='Restart Quiz';
+    goMenuBtn = document.createElement('button');
+    goMenuBtn.innerText='Undo Menu';
+    moduleBg.firstElementChild.append(restartBtn, goMenuBtn);
     restartBtn.addEventListener('click', ()=>{
         restartQuiz();
+    })
+    goMenuBtn.addEventListener('click', () => {
+        window.location.reload();
     })
 }
 
@@ -106,6 +125,34 @@ const pasNextQuestion = () => {
             quiz.remove();
             renderQuiz(questionNumber);
         }
-    }, 500);   
-    
+    }, 5000);     
 }
+
+// Jokers
+const useJoker = (correctAnswer) => {
+    telJokerBtn.addEventListener('click', () => {
+        jokerModal.style.display='block';
+        jokerModal.firstElementChild.innerText= `In my opinion the correct variant is ${correctAnswer}`;
+        telJokerBtn.setAttribute('disabled', 'true');
+    })
+    peopleJokerBtn.addEventListener('click', () => {
+        jokerModal.style.display='block';
+        let peoplePercent = 0;
+        while(peoplePercent < 50){
+            peoplePercent = Math.floor(Math.random()*100);
+        }
+        jokerModal.firstElementChild.innerText= `${peoplePercent} percent of people think that answer is ${correctAnswer}`;
+        peopleJokerBtn.setAttribute('disabled', 'true');
+    })
+}
+
+// Close Modals
+window.onclick = function(event) {
+    if (event.target == jokerModal) {
+        jokerModal.style.display = "none";
+    }else if (event.target == moduleBg) {
+        moduleBg.style.display = "none";
+    }
+
+}
+  

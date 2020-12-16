@@ -1,19 +1,38 @@
 @import './details/reset';
 @import './details/common';
 @import './details/mixin.scss';
+@import './joker/joker';
 @import './module/index';
+
+@keyframes answer {
+    from {padding: 0 30px;}
+    to {padding: 15px 30px;}
+}
 
 .quiz{
     margin: 30px auto;
     width: 400px;
     .quiz-header{
-        background-color: grey;
+        background-color: #21211D;
         color: #fff;
         text-align: center;
-        padding: 5px 0;
-        margin-bottom: 20px;
+        padding: 8px 0;
+        margin-bottom: 5px;
+        border-top-right-radius: 15px;
+    }
+    .question{
+        width: 100%;
+        text-align: center;
+        padding: 20px 0;
+        background-color: #21211D;
+        color: #fff;
+        margin-bottom: 10px;
+        border-bottom-left-radius: 15px;
     }
     .answer{
+        animation-name: answer;
+        animation-duration: .5s;
+        animation-fill-mode: forwards;
         margin: auto;
         width: 100%;
         margin: 5px 0;
@@ -36,7 +55,7 @@
 }
 
 main{
-    width: 300px;
+    width: 400px;
     margin: auto;
     @include flex(center, start);
     >h1{
@@ -45,9 +64,15 @@ main{
     }
     >form{
         margin-top: 30px;
-        >label, input, button{
+        >input, button{
+            box-sizing: border-box;
             width: 100%;
             margin: 5px 0;
+            border: none;
+            padding: 10px 5px;
+            outline: none;
+            background-color: purple;
+            color: #fff;
         }
     }
     .score{
