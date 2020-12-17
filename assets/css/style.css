@@ -190,7 +190,7 @@ body > .logo {
 
 .joker-module-bg .joker-module {
   width: 600px;
-  height: 200px;
+  height: 250px;
   background-color: #fff;
   color: #000;
   display: -webkit-box;
@@ -209,10 +209,80 @@ body > .logo {
   position: absolute;
   left: 50%;
   top: 40%;
-  font-size: 20px;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   border-radius: 10px;
+}
+
+.joker-module-bg .joker-module .friends-list {
+  width: 550px;
+  height: 200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.joker-module-bg .joker-module .friends-list .friend-card {
+  background-color: lightcoral;
+  width: calc((100% - 40px)/3);
+  height: 100%;
+  padding: 5px 0;
+  border-radius: 4px;
+  background-color: rgba(128, 0, 128, 0.4);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  cursor: pointer;
+}
+
+.joker-module-bg .joker-module .friends-list .friend-card > img {
+  height: 160px;
+}
+
+.joker-module-bg .joker-module .indicators-list {
+  width: 550px;
+  height: 200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.joker-module-bg .joker-module .indicators-list .indicator {
+  height: calc((100% - 40px) / 4);
+  background-color: royalblue;
+  color: #fff;
+  padding: 0 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 .module-bg {

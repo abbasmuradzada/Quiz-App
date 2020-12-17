@@ -29,7 +29,7 @@
     display: none;
     .joker-module{
         width: 600px;
-        height: 200px;
+        height: 250px;
         background-color: #fff;
         color: #000;
         display: flex;
@@ -39,8 +39,48 @@
         position: absolute;
         left: 50%;
         top: 40%;
-        font-size: 20px;
         transform: translate(-50%, -50%);
         border-radius: 10px;
+        .friends-list{
+            width: 550px;
+            height: 200px;
+            display: flex;
+            justify-content: space-between;
+            .friend-card{
+                background-color: lightcoral;
+                width: calc((100% - 40px)/3);
+                height: 100%;
+                padding: 5px 0;
+                border-radius: 4px;
+                background-color: rgba($color: purple, $alpha: .4);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+                cursor: pointer;
+                >img{
+                    height: 160px;
+                }
+            }
+        }
+        .indicators-list{
+            width: 550px;
+            height: 200px;
+            // background-color: rosybrown;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            .indicator{
+                height: calc((100% - 40px) / 4);
+                // width: 50%;
+                background-color: royalblue;
+                color: #fff;
+                padding: 0 10px;
+                display: flex;
+                align-items: center;
+                box-sizing: border-box;
+            }            
+        }
     }        
 }

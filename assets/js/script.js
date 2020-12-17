@@ -11,17 +11,9 @@ const peopleJokerBtn = document.querySelector('.people-joker')
 const jokerModal = document.querySelector('.joker-module-bg'); 
 // const restartBtn = document.querySelector('.restart-btn');
 
-const mainAudio = './assets/sounds/main.mp3'
-const breakAudio = './assets/sounds/break.mp3'
-const startAudio = './assets/sounds/start.mp3'
-const correctAudio = './assets/sounds/correct.mp3'
-const wrongAudio = './assets/sounds/wrong.mp3'
-const jokerAudio = './assets/sounds/joker.mp3'
-
 let audio = new Audio;
-audio.src = mainAudio;
 audio.autoplay = true;
-// audio.play();
+audio.src = mainAudio;
 let questionNumber = 0;
 let score = 0;
 let playerName;
@@ -90,7 +82,7 @@ const renderQuiz = (questionNum) => {
     jokers.style.display='block';
     scoreText.innerText=`Score: ${score}`;
     checkAnswer(questions[questionNum].correctAnswer);
-    useJoker(questions[questionNum].answerList[questions[questionNum].correctAnswer - 1]);
+    useJoker(questions[questionNum].answerList[questions[questionNum].correctAnswer - 1], questions[questionNum].correctAnswer);
 }
 
 // Start Quiz
@@ -143,23 +135,69 @@ const pasNextQuestion = () => {
 }
 
 // Jokers
-const useJoker = (correctAnswer) => {
+const useJoker = (correctAnswer, cIndex) => {
     telJokerBtn.addEventListener('click', () => {
+        jokerModal.firstElementChild.firstElementChild ? jokerModal.firstElementChild.firstElementChild.remove() : null;
+        let text;
         audio.src = jokerAudio;
         jokerModal.style.display='block';
-        jokerModal.firstElementChild.innerText= `In my opinion the correct variant is ${correctAnswer}`;
+        const friendsList = document.createElement('div');
+        friendsList.className='friends-list';
+        jokerModal.firstElementChild.appendChild(friendsList);
+        frends.forEach(friend => {
+            const friendCard = document.createElement('div');
+            friendCard.className = 'friend-card';
+            const friendName = document.createElement('span');
+            friendName.innerText = friend.name;
+            const friendImg = document.createElement('img');
+            friendImg.src = friend.imgUrl;
+            const friendStatus = document.createElement('p');
+            friendStatus.innerText = friend.status;
+            friendCard.append(friendName, friendImg, friendStatus);
+            friendsList.appendChild(friendCard);
+        
+            document.querySelectorAll('.friend-card').forEach(element => {
+                element.addEventListener('click', () => {
+                    text = `${element.firstElementChild.innerText}: In my opinion correct answer is ${correctAnswer}`
+                    element.parentElement.remove();
+                    jokerModal.firstElementChild.innerText= text;
+                });        
+            });    
+        });
+
         telJokerBtn.setAttribute('disabled', 'true');
     })
     peopleJokerBtn.addEventListener('click', () => {
+        jokerModal.firstElementChild.firstElementChild ? jokerModal.firstElementChild.firstElementChild.remove() : null;
+        const randomNums = [Math.floor(Math.random()*25), Math.floor(Math.random()*25), Math.floor(Math.random()*25)]
+        let randomNumsIndex = 0;
+        
         audio.src = jokerAudio;
         jokerModal.style.display='block';
-        let peoplePercent = 0;
-        while(peoplePercent < 50){
-            peoplePercent = Math.floor(Math.random()*100);
-        }
-        jokerModal.firstElementChild.innerText= `${peoplePercent} percent of people think that answer is ${correctAnswer}`;
+        const indicatorsList = document.createElement('div');
+        indicatorsList.className = 'indicators-list';
+        jokerModal.firstElementChild.appendChild(indicatorsList);
+        variants.forEach((element, index) => {
+            const indicator = document.createElement('div');
+            indicator.className='indicator';
+            if (index == cIndex-1) {
+                let maxPercent = 100;
+                randomNums.forEach(rNum => {
+                    maxPercent-=rNum;
+                    indicator.innerText = `${element}. ${correctAnswer} ----- (${maxPercent}%)`;
+
+                });
+                indicator.style.width=`${maxPercent}%`
+            }else{
+                indicator.style.width=`${randomNums[randomNumsIndex]}%`
+                randomNumsIndex++;
+                indicator.innerText = element;
+            }
+            indicatorsList.appendChild(indicator);
+        });
         peopleJokerBtn.setAttribute('disabled', 'true');
     })
+
 }
 
 // Close Modals
