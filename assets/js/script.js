@@ -17,7 +17,7 @@ audio.src = mainAudio;
 let questionNumber = 0;
 let score = 0;
 let playerName;
-
+const salam = 'd';
 // Check Answer
 const checkAnswer = (correctIndex) => {
     let clickable = true;
@@ -161,14 +161,16 @@ const useJoker = (correctAnswer, cIndex) => {
                     text = `${element.firstElementChild.innerText}: In my opinion correct answer is ${correctAnswer}`
                     element.parentElement.remove();
                     jokerModal.firstElementChild.innerText= text;
+                    telJokerBtn.setAttribute('disabled', 'true');
                 });        
             });    
         });
 
-        telJokerBtn.setAttribute('disabled', 'true');
     })
     peopleJokerBtn.addEventListener('click', () => {
         jokerModal.firstElementChild.firstElementChild ? jokerModal.firstElementChild.firstElementChild.remove() : null;
+        jokerModal.firstElementChild.innerText= '';
+        
         const randomNums = [Math.floor(Math.random()*25), Math.floor(Math.random()*25), Math.floor(Math.random()*25)]
         let randomNumsIndex = 0;
         
@@ -204,5 +206,6 @@ const useJoker = (correctAnswer, cIndex) => {
 window.onclick = function(event) {
     if (event.target == jokerModal) {
         jokerModal.style.display = "none";
+        audio.src = startAudio;
     }
 }
